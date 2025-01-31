@@ -1,0 +1,67 @@
+CHIP SevenSegmentDisplay {
+    IN in[4];
+    OUT a,b,c,d,e,f,g;
+
+    PARTS:
+Not(in = in[0],out = n0);
+Not(in = in[1],out = n1);
+Not(in = in[2],out = n2);
+Not(in = in[3],out = n3);
+
+//output for a
+And(a= n2,b=n0,out=a1);
+And(a=in[2],b=n1,out=a2);
+And(a=in[2],b=in[0],out=a3);
+And(a=n2,b=in[1],out=a4);
+Or(a=a1,b=a2,out=at1);
+Or(a=at1,b=a3,out=at2);
+Or(a=at2,b=a4,out=a);
+
+//Output for b
+And(a=in[2],b=n0,out=b1);
+Or(a=n2,b=in[3],out=b2);
+Or(a=b2,b=b1,out=b);
+
+//Output for c
+Or(a=in[2],b=n1,out=c1);
+Or(a=c1,b=n0,out=c);
+
+//Output for d
+And(a=in[2],b=in[0],out=d1);
+And(a=in[1],b=in[0],out=d2);
+And(a=n2,b=n0,out=d3);
+Or(a=in[3],b=d1,out=dt1);
+Or(a=dt1,b=d2,out=dt2);
+Or(a=dt2,b=d3,out=d);
+
+//Output for e
+And(a=n3,b=in[2],out=p1);
+And(a=p1,b=n1,out=p2);
+And(a=p2,b=in[0],out=e1);
+And(a=in[3],b=n0,out=e2);
+And(a=n2,b=in[1],out=p3);
+And(a=p3,b=in[0],out=e3);
+And(a=n2,b=n1,out=p4);
+And(a=p4,b=n0,out=e4);
+Or(a=e1,b=e2,out=et1);
+Or(a=et1,b=e3,out=et2);
+Or(a=et2,b=e4,out=e);
+
+//Output for f
+
+And(a=n2,b=n1,out=u1);
+And(a=u1,b=n0,out=f1);
+And(a=in[2],b=in[0],out=f2);
+And(a=in[2],b=in[1],out=f3);
+Or(a=in[3],b=f1,out=ft1);
+Or(a=ft1,b=f2,out=ft2);
+Or(a=ft2,b=f3,out=f);
+
+//Output for g
+And(a=in[2],b=in[0],out=g1);
+Or(a=in[3],b=in[1],out= g2);
+Or(a=g2,b=g1,out=g);
+
+
+
+}
